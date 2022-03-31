@@ -50,11 +50,7 @@ def get_node_id():
 def generate_oid(node_id, process_id, thread_id, instance):
     ent = bytes_if_py2('%x-%x-%x-%x' % (
         node_id, process_id, thread_id, id(instance)))
-    try:
-        ret = str(uuid3(NAMESPACE_OID, ent))
-    except ValueError:
-        ret = str(uuid5(NAMESPACE_OID, ent))
-    return ret
+    return str(uuid5(NAMESPACE_OID, ent))
 
 
 def oid_from(instance, threads=True):
